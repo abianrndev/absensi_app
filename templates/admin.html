@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Halaman Admin</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #00ffcc;
+        }
+        
+        .nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #00ffcc;
+            font-weight: bold;
+        }
+        
+        .nav a:hover {
+            text-decoration: underline;
+        }
+        
+        .card {
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Selamat Datang, Admin 👨‍💼</h1>
+
+    <div class="nav">
+        <a href="{{ url_for('absensi') }}">📝 Form Absensi</a>
+        <a href="{{ url_for('riwayat') }}">📊 Riwayat Absensi</a>
+        <a href="{{ url_for('logout') }}">🚪 Logout</a>
+    </div>
+
+    <div class="card">
+        <h2>Kontrol Panel Admin</h2>
+        <p>Gunakan menu di atas untuk melihat data absensi atau kembali ke form.</p>
+    </div>
+</body>
+
+</html>
