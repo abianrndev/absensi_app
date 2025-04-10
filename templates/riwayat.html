@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Riwayat Absensi</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #00ffcc;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.15);
+        }
+        
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        
+        th {
+            background-color: #00ffcc;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background-color: #2a2a2a;
+        }
+        
+        .filter-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        select {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: none;
+            background-color: #2b2b2b;
+            color: #fff;
+        }
+        
+        option {
+            background-color: #1e1e1e;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>Filter Riwayat Absensi</h2>
+    <form method="GET">
+        <label for="shift">Shift:</label>
+        <select name="shift" id="shift">
+    <option value="">Semua</option>
+    <option value="Siang">Siang</option>
+    <option value="Malam">Malam</option>
+  </select>
+
+        <label for="tanggal">Tanggal:</label>
+        <input type="date" name="tanggal" id="tanggal">
+
+        <button type="submit">Filter</button>
+    </form>
+
+    </form>
+    {% if data_absen %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Shift</th>
+                <th>Waktu</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data_absen %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Belum ada data absensi.</p>
+    {% endif %}
+
+    <br>
+    <a href="/">⬅️ Kembali ke Form Absensi</a>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/export/pdf">
+            <button style="padding: 10px 20px; background-color: #00ffcc; border: none; border-radius: 8px; color: #000; cursor: pointer;">
+                📄 Export PDF
+            </button>
+        </a>
+    </div>
+
+</body>
+
+</html>

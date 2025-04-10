@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Grafik Absensi</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #00ffcc;
+            margin-bottom: 30px;
+        }
+        
+        canvas {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        a {
+            color: #00ffcc;
+            display: inline-block;
+            margin-top: 30px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Grafik Absensi per Shift</h1>
+
+    <canvas id="absensiChart"></canvas>
+    <script>
+        const shiftCount = JSON.parse('{{ shift_count | tojson | safe }}');
+
+        const ctx = document.getElementById('absensiChart').getContext('2d');
+
+        const absensiChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Siang', 'Malam'],
+                datasets: [{
+                    label: 'Jumlah Absen',
+                    data: [shiftCount.Siang || 0, shiftCount.Malam || 0],
+                    backgroundColor: ['#00ffcc', '#ff4081']
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#fff'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#fff'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#fff'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+    <a href="/">⬅️ Kembali ke Form Absensi</a>
+</body>
+
+</html>
