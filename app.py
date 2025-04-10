@@ -94,6 +94,36 @@ def grafik():
 
     return render_template('grafik.html', shift_count=shift_count)
 
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+app.secret_key = 'abian123'
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == 'admin' and password == 'admin':
+            session['logged_in'] = True
+            return redirect(url_for('admin'))
+        else:
+            flash('Usename dan pasword salah!', 'error')
+            return redirect(url_for('login'))
+    
+    return render_template('login.html')
+
+@app.route('/admin')
+def admin():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+
+     # isi halaman admin, bisa lihat data absensi misal
+    return render_template('admin.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)
